@@ -1,0 +1,12 @@
+#ifndef LLVM_LIB_TARGET_MAKSIM_TARGETINFO_MAKSIMTARGETINFO_H
+#define LLVM_LIB_TARGET_MAKSIM_TARGETINFO_MAKSIMTARGETINFO_H
+
+namespace llvm {
+
+class Target;
+
+Target &getTheMaksimTarget();
+
+} // end namespace llvm
+
+#endif // LLVM_LIB_TARGET_MAKSIM_TARGETINFO_MAKSIMTARGETINFO_H
