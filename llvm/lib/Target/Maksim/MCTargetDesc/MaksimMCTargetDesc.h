@@ -1,6 +1,7 @@
 #ifndef LLVM_LIB_TARGET_MAKSIM_MCTARGETDESC_MAKSIMMCTARGETDESC_H
 #define LLVM_LIB_TARGET_MAKSIM_MCTARGETDESC_MAKSIMMCTARGETDESC_H
 
+#include <memory>
 namespace llvm {
 class MCCodeEmitter;
 class MCContext;
@@ -16,6 +17,8 @@ MCCodeEmitter *createMaksimMCCodeEmitter(const MCInstrInfo &MCII, MCContext &Ctx
 MCAsmBackend *createMaksimAsmBackend(const Target &T, const MCSubtargetInfo &STI,
                                   const MCRegisterInfo &MRI,
                                   const MCTargetOptions &Options);
+std::unique_ptr<MCObjectTargetWriter> createMaksimELFObjectWriter(bool Is64Bit,
+                                                               uint8_t OSABI);
 } // namespace llvm
 
 // Defines symbolic names for Maksim registers.  This defines a mapping from

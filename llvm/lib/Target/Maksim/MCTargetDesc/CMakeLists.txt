@@ -4,6 +4,7 @@ add_llvm_component_library(LLVMMaksimDesc
   MaksimInstPrinter.cpp
   MaksimMCCodeEmitter.cpp
   MaksimAsmBackend.cpp
+  MaksimELFObjectWriter.cpp
 
   LINK_COMPONENTS
   MC
