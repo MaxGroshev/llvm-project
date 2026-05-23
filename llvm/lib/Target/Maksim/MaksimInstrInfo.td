@@ -57,6 +57,10 @@ def MOVLI : MaksimInst<0xAA, (outs GPR:$r1), (ins simm16:$r3_imm),
 let r1 = 0, r2 = 0, r3_imm = 0 in
 def FLUSH : MaksimInst<0xFF, (outs), (ins), "FLUSH", [(int_maksim_flush)]>;
 
-// // putpixel
-def PUTPIXEL : MaksimInst<0xEE, (outs), (ins DPR:$r1, DPR:$r2, DPR:$r3_imm),
-                      "PUTPIXEL $r1 $r2 $r3_imm", [(int_maksim_putpixel DPR:$r1, DPR:$r2, DPR:$r3_imm)]>;
+// putpixel
+def PUTPIXEL : MaksimInst<0xEE, (outs), (ins GPR:$r1, GPR:$r2, GPR:$r3_imm),
+                      "PUTPIXEL $r1 $r2 $r3_imm", [(int_maksim_putpixel GPR:$r1, GPR:$r2, GPR:$r3_imm)]>;
+def MAX : MaksimInst<0xEE, (outs GPR:$r3_imm), (ins GPR:$r1, GPR:$r2),
+                      "MAX $r1 $r2 $r3_imm", [(set GPR:$r3_imm, (int_maksim_max GPR:$r1, GPR:$r2))]>;
+def MIN : MaksimInst<0xEE, (outs GPR:$r3_imm), (ins GPR:$r1, GPR:$r2),
+                      "MIN $r1 $r2 $r3_imm", [(set GPR:$r3_imm, (int_maksim_min GPR:$r1, GPR:$r2))]>;                    

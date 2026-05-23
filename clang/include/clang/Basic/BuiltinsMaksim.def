@@ -1,0 +1,6 @@
+BUILTIN(maksimPutPixel, "viii", "n")
+BUILTIN(maksimMax, "iii", "n")
+BUILTIN(maksimMin, "iii", "n")
+BUILTIN(maksimFlush, "v", "n")
+
+#undef BUILTIN
