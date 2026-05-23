@@ -9,6 +9,7 @@ tablegen(LLVM MaksimGenMCPseudoLowering.inc -gen-pseudo-lowering)
 tablegen(LLVM MaksimGenDAGISel.inc -gen-dag-isel)
 tablegen(LLVM MaksimGenCallingConv.inc -gen-callingconv)
 tablegen(LLVM MaksimGenAsmWriter.inc -gen-asm-writer)
+tablegen(LLVM MaksimGenMCCodeEmitter.inc -gen-emitter)
 
 add_public_tablegen_target(MaksimCommonTableGen)
 
