@@ -1,4 +1,3 @@
-
 let TargetPrefix = "maksim" in {  // All intrinsics start with "llvm.maksim.".
  
  def int_maksim_putpixel:
