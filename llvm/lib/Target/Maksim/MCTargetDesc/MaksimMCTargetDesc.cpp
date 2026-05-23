@@ -78,4 +78,6 @@ extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeMaksimTargetMC() {
   TargetRegistry::RegisterMCInstPrinter(TheMaksimTarget, createMaksimMCInstPrinter);
   // Register the MC Code Emitter.
   TargetRegistry::RegisterMCCodeEmitter(TheMaksimTarget, createMaksimMCCodeEmitter);
+  // Register the asm backend.
+  TargetRegistry::RegisterMCAsmBackend(TheMaksimTarget, createMaksimAsmBackend);
 }
