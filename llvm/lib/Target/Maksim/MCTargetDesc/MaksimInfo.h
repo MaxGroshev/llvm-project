@@ -7,7 +7,7 @@ namespace llvm {
 
 namespace MaksimOp {
 enum OperandType : unsigned {
-  OPERAND_MAKSIMM16 = MCOI::OPERAND_FIRST_TARGET,
+  OPERAND_SIMM16 = MCOI::OPERAND_FIRST_TARGET,
 };
 } // namespace MaksimOp
 

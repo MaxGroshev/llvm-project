@@ -5,13 +5,13 @@
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Target/TargetMachine.h"
 
-#define MAKSIM_DUMP(Color)                                                        \
+/*#define MAKSIM_DUMP(Color)                                                      \
   {                                                                            \
     llvm::errs().changeColor(Color)                                            \
         << __func__ << "\n\t\t" << __FILE__ << ":" << __LINE__ << "\n";        \
     llvm::errs().changeColor(llvm::raw_ostream::WHITE);                        \
-  }
-// #define MAKSIM_DUMP(Color) {}
+  }*/
+#define MAKSIM_DUMP(Color) {}
 
 #define MAKSIM_DUMP_RED MAKSIM_DUMP(llvm::raw_ostream::RED)
 #define MAKSIM_DUMP_GREEN MAKSIM_DUMP(llvm::raw_ostream::GREEN)

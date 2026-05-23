@@ -15,23 +15,23 @@ include "MaksimInstrFormats.td"
 // Maksim Operand, Complex Patterns and Transformations Definitions.
 //===----------------------------------------------------------------------===//
 
-class MaksimmAsmOperand<int width> : AsmOperandClass {
-  let Name = "Maksimm" # width;
+class SImmAsmOperand<int width> : AsmOperandClass {
+  let Name = "SImm" # width;
   let RenderMethod = "addImmOperands";
   let DiagnosticType = !strconcat("Invalid", Name);
 }
 
-def maksimm16 : Operand<i32>, ImmLeaf<i32, [{return isInt<16>(Imm);}]> {
-  let ParserMatchClass = MaksimmAsmOperand<16>;
-  let EncoderMethod = "getImmOpValue";
-  let DecoderMethod = "decodeMaksimmOperand<16>";
+def simm16 : Operand<i32>, ImmLeaf<i32, [{return isInt<16>(Imm);}]> {
+  let ParserMatchClass = SImmAsmOperand<16>;
+  let EncoderMethod = "getSImm16OpValue";
+  let DecoderMethod = "decodeSImmOperand<16>";
   let MCOperandPredicate = [{
     int64_t Imm;
     if (MCOp.evaluateAsConstantImm(Imm))
       return isInt<16>(Imm);
     return MCOp.isBareSymbolRef();
   }];
-  let OperandType = "OPERAND_MAKSIMM16";
+  let OperandType = "OPERAND_SIMM16";
   let OperandNamespace = "MaksimOp";
 }
 
@@ -39,9 +39,9 @@ def maksimm16 : Operand<i32>, ImmLeaf<i32, [{return isInt<16>(Imm);}]> {
 // Maksim Instructions
 //===----------------------------------------------------------------------===//
 
-let hasSideEffects = 0, mayLoad = 0, mayStore = 0, isCall = 1, isBranch = 1, isTerminator = 1 in
-def BR : MaksimInst<0x0, (outs), (ins GPR:$rs1), "BR $rs1",
-                  [(brind GPR:$rs1)]>;
+let hasSideEffects = 0, mayLoad = 0, mayStore = 0, isCall = 1, isBranch = 1, isTerminator = 1, r2 = 0, r3_imm = 0 in
+def BR : MaksimInst<0xBB, (outs), (ins GPR:$r1), "BR $r1",
+                 [(brind GPR:$r1)]>;
 
 let isBarrier = 1, isReturn = 1, isTerminator = 1 in
 def PseudoRET : MaksimPseudoInst<(outs), (ins), "# PseudoRET",
@@ -49,7 +49,7 @@ def PseudoRET : MaksimPseudoInst<(outs), (ins), "# PseudoRET",
                 PseudoInstExpansion<(BR R0)>;
 
 // movli
-let isAsCheapAsAMove = 1, isCodeGenOnly = 1, isReMaterializable = 1 in
-def MOVLI : MaksimInst<0x0, (outs GPR:$rd), (ins maksimm16:$imm),
-                     "MOVli $rd $imm",
-                     [(set GPR:$rd, maksimm16:$imm)]>;
+let isAsCheapAsAMove = 1, isCodeGenOnly = 1, isReMaterializable = 1, r2 = 0 in
+def MOVLI : MaksimInst<0xAA, (outs GPR:$r1), (ins simm16:$r3_imm),
+                    "MOVli $r1 $r3_imm",
+                    [(set GPR:$r1, simm16:$r3_imm)]>;
